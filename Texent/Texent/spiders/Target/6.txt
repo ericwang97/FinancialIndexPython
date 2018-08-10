@@ -1,0 +1,40 @@
+北京时间 6 月 5 日凌晨，苹果 2018 年全球开发者大会 (WWDC) 在圣何塞的 McEnery 会议中心开幕。在去年的开发者大会上，围绕软、硬件，苹果介绍了融合机器学习与人工智能的产品，例如 CoreML 框架、智能音箱 HomePod 等。
+而在今年的开发者大会上，苹果的核心放在了软件上。从 IOS 12 开始，库克开启了今年的 WWDC。而在机器学习方面，苹果发布了最新的 Create ML 与 Core ML 2。
+Create ML
+ 
+Create ML 文档地址：https://developer.apple.com/documentation/create_ml
+在苹果开发者文档介绍中，Create ML 的目标是为应用程序创建机器学习模型。开发者可以使用 Swift 与 macOS 试验场等熟悉的工具在 Mac 上创建和训练定制化的机器学习模型，例如用于图像识别、文本语义抽取或数值关系搜索等任务的模型。
+ 
+据介绍，开发者可以使用具有代表性的样本训练模型来做模式识别，例如使用大量不同种类的狗以训练模型识别「狗」。在训练完模型后，开发者在模型没见过的数据集上测试并评估它的性能。当模型有较好的性能时，就能使用 Core ML 将其集成到应用程序中。
+ 
+Create ML 利用机器学习基础设施建立进苹果 Photos 和 Siri 这样的产品中。这意味着你的图片分类和自然语言处理模型可以变得更小、花费更少的训练时间。
+目前 Create ML 支持的任务主要包含计算机视觉、自然语言处理和其它使用标注信息进行预测的一般模型。在计算机视觉中，开发者可以训练一个机器学习模型以完成图像识别任务。重要的是，开发者在这一过程中可以使用 Xcode 试验场的 UI 来训练模型。自然语言处理主要展示了如何使用机器学习做文本分类，它允许创建文本级的自然语言分类与词汇级地分类标注。
+当然其它任务还有一般的分类问题与回归问题，Create ML 允许开发者训练一个模型以将数据分类为离散的类别或连续的数值。除此之外，Create ML 还展示了机器学习很多模块，包括用来提升分类或回归模型性能的度量方法和格式化数据的方法等。
+ 
+如下我们将简要展示如何使用 Create ML 创建图像分类应用。简单而言，我们希望给定分类器一些图像的，然后它会输出图像的具体类别。当然首先我们需要准备一些训练样本，包括图像与对应标注。然后在 Xcode 试验场中创建一个 MLImageClassifierBuilder 实例，并以实时的方式查看：
+// Import CreateMLUI to train the image classifier in the UI.
+// For other Create ML tasks, import CreateML instead.
+import CreateMLUI 
+
+let builder = MLImageClassifierBuilder()
+builder.showInLiveView()
+
+先显示 Xcode 中的助理编辑器，然后再运行试验场（Playground），这样实时的方式就会显示一个图像分类器：
+ 
+随后的训练和评估过程都是直接拖拽训练数据集与测试数据集完成，非常方便。如下将测试数据集拖拽到图中位置后就可以开始测试性能：
+ 
+当开发者完成训练并获得满意的性能时，一般就能保存为 Core ML 模型并添加到应用程序中：
+ 
+Core ML 2
+ 
+去年，苹果发布了 Core ML。这是一个在苹果产品上（包括 Siri、Camera 和 QuickTyPe）使用的设备上高性能机器学习框架。Core ML 能够帮助开发者快速的融合多种机器学习模型到 APP 中，包括多层的深度学习模型以及标准的 SVM、线性模型等。此外，Core ML 为设备性能进行了优化，从而减少了内存占用和功耗。严格在设备上运行能够确保用户数据的隐私，并且能保证你的应用在没有网络连接时也能够工作和响应。
+ 
+Core ML 支持用于图像分析的 Vision；用于自然语言处理的 Foundation（比如 NSLinguisticTagger 类）和用于评估已经学习到的决策树的 GameplayKit。Core ML 本身构建于低层面的原语（primitives）之上，比如 Accelerate、BNNS 和 Metal Performance Shaders。
+
+今天，苹果发布了 Core ML 2，一个更好的升级版本。据苹果软件高级副总裁 Craig Federighi 介绍，相比于上一版本使用 Batch 预测速度快了 30% 左右，使用 Quantization 模型大小减少了 75% 左右。
+
+小结
+
+历史 2 个多小时 Keynote，苹果介绍了自己的多个软件。除了发布 Create ML 与 Core ML 2 之外当然还介绍了其他在人工智能领域的应用，例如隐私保护、Siri、图片等。
+其实，从 2016 年 Backchannel 对苹果人工智能的专题报道开始，人们对这家公司的 AI 研究与产品都极为关注，而后这家公司在 AI 方面的动作不断。最近，苹果从谷歌挖来了 John Giannandrea 来负责机器学习与 AI 策略。此外，一直也有消息透露苹果在开发自己的芯片来加速计算机视觉、语音识别等 AI 应用。
+期待未来苹果在产品融合人工智能上给我们带来更大的惊喜。
